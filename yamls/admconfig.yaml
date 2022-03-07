@@ -1,0 +1,44 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: myhood
+webhooks:
+  - clientConfig:
+      caBundle: |
+        LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURoakNDQW02Z0F3SUJBZ0lVTnZMdTdnNjMr
+        WmZCSk5OZUwzeXRaOTB3dVdvd0RRWUpLb1pJaHZjTkFRRUwKQlFBd1NURUxNQWtHQTFVRUJoTUNl
+        bWd4Q3pBSkJnTlZCQWNUQW1KcU1Rc3dDUVlEVlFRS0V3SmlhakVMTUFrRwpBMVVFQ3hNQ1EwRXhF
+        ekFSQmdOVkJBTVRDa3QxWW1WeWJtVjBaWE13SGhjTk1qSXdNekEzTVRRME5qQXdXaGNOCk1qY3dN
+        ekEyTVRRME5qQXdXakJKTVFzd0NRWURWUVFHRXdKNmFERUxNQWtHQTFVRUJ4TUNZbW94Q3pBSkJn
+        TlYKQkFvVEFtSnFNUXN3Q1FZRFZRUUxFd0pEUVRFVE1CRUdBMVVFQXhNS1MzVmlaWEp1WlhSbGN6
+        Q0NBU0l3RFFZSgpLb1pJaHZjTkFRRUJCUUFEZ2dFUEFEQ0NBUW9DZ2dFQkFONGVOL3A2M3BsTm1E
+        NUQ1Z1JIWEpqSXQ2R0ozbkZICnVUUVBLb1JCRXRFeElZbXkrMGhJY052YzhGU09iRmZNL0MxZkFl
+        QXpOUmZDbWtKVzR3NGNSSzIvRkpDOGowSTEKLzFMa1VqeFdnUERZeld1aE8xNTBadE9LdFc3Nm1j
+        NGhyWjlpeHREQWFGZmZDZXdjY3UzTkM5Z1JMWW9TNmNoZgp2LzhnK3c4cGx5SzRmUTcreFN0THVz
+        Nnl0a2FsLzFYaytsNXRacVVrTGpIOENRc1QxbkQ4bUEydWdZMkdDS2VJCk9yMVhIeEVuTk5JVWVh
+        TUw0Z0lzeXp1QTE5aENPUGNSbXA5Tk44TXhkK1kxMk9LMkNxQTNBdU1JaDhtcEJOcm0KemdTT05l
+        L1BoSzd0K3FKUDZYQnFNcUYrTGxsbUpqaURzYXcySFNuQndoZVA4Y2t1a3pnbStxY0NBd0VBQWFO
+        bQpNR1F3RGdZRFZSMFBBUUgvQkFRREFnRUdNQklHQTFVZEV3RUIvd1FJTUFZQkFmOENBUUl3SFFZ
+        RFZSME9CQllFCkZQaFo2U0xuWnNsWTNhak05aU1MbGtRZE14MHRNQjhHQTFVZEl3UVlNQmFBRlBo
+        WjZTTG5ac2xZM2FqTTlpTUwKbGtRZE14MHRNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUURKL3lL
+        OXZhNllnc0RGZVdMZHBMM05SaWR1NFFuNgo1U0hNMm5hSkE2OVArbEtXUVdFVktEQTdqd1hqMVF0
+        b2F1MEs3clZhOTI0MUJkV3pyQ1ZZV01nTWU5UmZrY1hJCmRmWENuY08vaU1vK0dPRUltRmdncFhY
+        YklEUHlDYXhLZ1Vrd1BMTHhCcDF3QnVoeUR6bTViM1JQOXYzSEUycWEKaW84TThnTmF5ekpzWW1I
+        TWdxVDBsWG4rT05IcGdQWFFFQkQ4TmV4WlBkdmlBd0RoZFFwbTNSOXVpR3ErZXZOeQpOODFkMFJi
+        LzZLZ0NQdDN4cFdPRjV0Sm1TYzArTDNmNHJ4Yy9xOGY2aWI2bVh3d0EweURJaHIvc2JhRm8xOXhw
+        CjlxTmQ0WlFNYkRKekdWSGhDVS9uTmJmLzBhZ2pEQnlDRzNqT3dsOTR4cFFwdUh0dG9ycFluSjNu
+        Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: myhook
+        namespace: kube-system
+        path: /pods
+    failurePolicy: Fail
+    sideEffects: NoneOnDryRun
+    name: myhook.jtthink.com
+    admissionReviewVersions: ["v1", "v1beta1"]
+    namespaceSelector: {}
+    rules:
+      - apiGroups:   [""]
+        apiVersions: ["v1"]
+        operations:  ["CREATE"]
+        resources:   ["pods"]
