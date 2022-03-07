@@ -13,7 +13,7 @@ spec:
       labels:
         app: myhook
     spec:
-      nodeName: jtthink4
+      nodeName: xiaolatiao1
       containers:
         - name: myhook
           image: alpine:3.12
@@ -30,7 +30,7 @@ spec:
       volumes:
         - name: app
           hostPath:
-            path: /home/shenyi/app
+            path: /home/xiaolatiao/webhook
         - name: hooktls
           secret:
             secretName: myhook
