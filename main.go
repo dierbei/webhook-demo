@@ -46,11 +46,14 @@ func main() {
 		w.Write(respBytes)
 	})
 
-	//server := &http.Server{
-	//	Addr:      ":443",
-	//	TLSConfig: lib.ConfigTLS(cofig)
-	//}
-	//server.ListenAndServeTLS("","")
-
-	http.ListenAndServe(":8080", nil)
+	// 需要生成证书
+	tlsConfig:=lib.Config{
+		CertFile:"/etc/webhook/certs/tls.crt",
+		KeyFile:"/etc/webhook/certs/tls.key",
+	}
+	server := &http.Server{
+		Addr:      ":443",
+		TLSConfig: lib.ConfigTLS(tlsConfig),
+	}
+	server.ListenAndServeTLS("","")
 }
