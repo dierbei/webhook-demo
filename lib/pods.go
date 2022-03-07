@@ -30,9 +30,9 @@ func AdmitPods(ar v1.AdmissionReview) *v1.AdmissionResponse {
 
 	// 业务逻辑
 	reviewResponse := v1.AdmissionResponse{}
-	if pod.Name == "xiaolaiao" {
+	if pod.Name == "xiaolatiao" {
 		reviewResponse.Allowed = false
-		reviewResponse.Result = &metav1.Status{Code: 503, Message: "pod name cannot be shenyi"}
+		reviewResponse.Result = &metav1.Status{Code: 503, Message: "pod name cannot be xiaolatiao"}
 	} else {
 		reviewResponse.Allowed = true
 	}
