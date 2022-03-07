@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/pods", func(w http.ResponseWriter, r *http.Request) {
 		log.Println(r.RequestURI)
 		var body []byte
 		if r.Body != nil {
