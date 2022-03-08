@@ -35,7 +35,35 @@ func AdmitPods(ar v1.AdmissionReview) *v1.AdmissionResponse {
 		reviewResponse.Result = &metav1.Status{Code: 503, Message: "pod name cannot be xiaolatiao"}
 	} else {
 		reviewResponse.Allowed = true
+
+		// 打补丁
+		reviewResponse.Patch = patchImage()
+		jp := v1.PatchTypeJSONPatch
+		reviewResponse.PatchType = &jp
 	}
 
 	return &reviewResponse
+}
+
+func patchImage() []byte{
+	str:=`[
+   {
+		"op" : "replace" ,
+		"path" : "/spec/containers/0/image" ,
+		"value" : "nginx:1.19-alpine"
+	},
+   {
+		"op" : "add" ,
+		"path" : "/spec/initContainers" ,
+		"value" : [{
+						"name" : "myinit",
+						"image" : "busybox:1.28",
+ 						"command" : ["sh", "-c", "echo The app is running!"]
+ 					 }]
+	}
+
+    
+   
+]`
+	return []byte(str)
 }

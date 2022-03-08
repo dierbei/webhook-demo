@@ -36,7 +36,11 @@ webhooks:
     sideEffects: NoneOnDryRun
     name: myhook.xiaolatiao.cn
     admissionReviewVersions: ["v1", "v1beta1"]
-    namespaceSelector: {}
+    namespaceSelector:
+      matchExpressions:
+        - key: xiaolatiao-injection
+          operator: In
+          values: [ "enabled","1" ]
     rules:
       - apiGroups:   [""]
         apiVersions: ["v1"]
